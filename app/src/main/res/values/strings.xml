@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Intendencia</string>
+
+    //Strings layout Login
+    <string name="Imgdescript">LogoApp</string>
+    <string name="lblIntendencia">Intendencia</string>
+    <string name="lblCorreo">Correo</string>
+    <string name="lblPass">Contraseña</string>
+    <string name="lblRecordar">Recordar Usuario y Contraseña</string>
+    <string name="lblBoton">Entrar</string>
+    <string name="lblOlvido">Olvidé la Contraseña</string>
+    <string name="lblAlta">Crear Nuevo Usuario</string>
+
+    //Strings layout Nuevo Usuario
+    <string name="lblNuevoCorreo">Correo Electronico:</string>
+    <string name="LblNuevaPass">Contraseña:</string>
+    <string name="lblConfirmarPass">Confirmar Contraseña</string>
+    <string name="LblConfirPass">Confirmar Contraseña:</string>
+    <string name="btnRegistrar">Registrar</string>
+    <string name="btnCancelar">Cancelar</string>
+
+    //Strings del Menu
+    <string name="menuBuscar">Buscar</string>
+    <string name="menuAjustes">Ajustes</string>
+    <string name="menuDesconectar">Desconectar</string>
+    <string name="menuTareas">Tareas</string>
+    <string name="menuDatos">Datos</string>
+    <string name="menuDatos1">Añadir Items</string>
+    <string name="menuDatos2">Añadir Tienda</string>
+
+
+    //Strings del layout Contraseña Olvidada
+    <string name="lblTextoVario1">¿No puedes Conectarte?</string>
+    <string name="lblTextoVario2">Introduzca su correo y le enviaremos instrucciones para restablecer la contraseña.</string>
+    <string name="btnReset">Restablecer Contraseña</string>
+    <string name="lblConsejo">Si no recibe un correo dentro de unos pocos minutos, por favor asegúrese de revisar en su carpeta de spam.</string>
+
+    //Strings del layout Ajustes
+    <string name="lblCuentaActual">Conectado actualmente con:</string>
+    <string name="lblCuenta">Cuenta</string>
+    <string name="lblAyuda">Información y Ayuda</string>
+    <string name="menuAcerca">Informacion</string>
+
+    //Strings del layout Ajustes_Cuenta
+    <string name="lblCambiarCorreo">Cambiar Correo</string>
+    <string name="lblCambiarPass">Cambiar Contraseña</string>
+    <string name="lblElimiarUsuario">Eliminar Cuenta</string>
+    <string name="lblModificarCuenta">Modificar Cuenta</string>
+
+    //Strings del layout Cambiar_Correo
+    <string name="lblCambioCorreo">¿Deseas Cambiar el correo?</string>
+    <string name="lblCorreoActual">Actualmete conectado con: </string>
+    <string name="hintCorreoViejo">Correo Antiguo</string>
+    <string name="hintNuevoCorreo">Correo Nuevo</string>
+    <string name="btnCambiar">Confirmar</string>
+
+    //Strings del layout Cambiar_Pass
+    <string name="lblCambioPass">¿Deseas Cambiar la Contraseña?</string>
+    <string name="hintPassOLD">Contraseña Actual</string>
+    <string name="hintPassNEW">Contraseña Nueva</string>
+
+    //Strings del layout Borrar_Usuario
+    <string name="lblBorrarUsuario1">¿Deseas Eliminar la Cuenta?</string>
+    <string name="lblBorrarUsuario2">Introduzca correo y contraseña:</string>
+    <string name="btnConfirmarBorrado">Eliminar</string>
+
+    //Strings de la linea_Tareas
+    <string name="txtCreado">usuario@gmail.com</string>
+    <string name="txtTarea">Tarea a Realizar</string>
+    <string name="LineaImg">IMMGCompleto</string>
+    <string name="lblTareas">Agregar Nueva Tarea</string>
+
+
+    //Strings del layout NewTienda
+    <string name="hintTiendaNombre">Nombre Tienda</string>
+    <string name="hintTiendaCapacidad">Nº Personas ±</string>
+    <string name="hintTiendaPiquetas">Nº Piquetas</string>
+    <string name="hintTiendaEstado">Estado</string>
+    <string name="hintTiendaFecha">Ultima Revisión</string>
+    <string name="btnTiendaAdd">Añadir</string>
+    <string name="btnTiendaFecha">Fecha</string>
+    <string name="txtTiendaCapacidad">Capacidad</string>
+    <string name="txtTiendaPiquetas">Piquetas</string>
+
+    <string-array name="modelo_tienda">
+        <item>- Seleccione Modelo -</item>
+        <item>Canadiense</item>
+        <item>Canadiense/Batisielles</item>
+    </string-array>
+    <string-array name="tipo_tienda">
+        <item>- Seleccione Tipo -</item>
+        <item>Fija</item>
+        <item>Ataque</item>
+    </string-array>
+</resources>

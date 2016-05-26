@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.david.intendencia">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 1. LAUNCHER -->
+        <activity
+            android:name=".Ventana_Launcher"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 2. VENTANA LOGIN -->
+        <activity
+            android:name=".Ventana_Login"
+            android:label="Intendencia LaSalle"
+            android:screenOrientation="portrait"
+            android:theme="@style/VentanaLogin">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Launcher" />
+        </activity>
+
+        <!-- 2.1. VENTANA CREAR NUEVO USUARIO -->
+        <activity
+            android:name=".Ventana_NewUser"
+            android:label="Nuevo Usuario"
+            android:parentActivityName=".Ventana_Login"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Login" />
+        </activity>
+
+        <!-- 2.2. VENTANA OLVIDA_PASS -->
+        <activity
+            android:name=".Ventana_Olvida"
+            android:label="Contraseña Olvidada"
+            android:parentActivityName=".Ventana_Login"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Login" />
+        </activity>
+
+        <!-- 4. VENTANA PRICIPAL -->
+        <activity
+            android:name=".Ventana_Main"
+            android:label="Pagina Principal"
+            android:parentActivityName=".Ventana_Login"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Login" />
+        </activity>
+
+        <!-- 5. VENTANA AJUSTES -->
+        <activity
+            android:name=".Ajustes.Ventana_Ajustes"
+            android:label="Ajustes"
+            android:parentActivityName=".Ventana_Main"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Login" />
+        </activity>
+
+        <!-- 5.1. VENTANA AJUSTES CUENTA -->
+        <activity
+            android:name=".Ajustes.Ventana_AjustesCuenta"
+            android:label="Cuenta"
+            android:parentActivityName=".Ajustes.Ventana_Ajustes"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ajustes.Ventana_Ajustes" />
+        </activity>
+
+        <!-- 5.1.1. VENTANA CAMBIO_CORREO -->
+        <activity
+            android:name=".Ajustes.Ventana_CambioCorreo"
+            android:label="Cambio de Correo"
+            android:parentActivityName=".Ajustes.Ventana_AjustesCuenta"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ajustes.Ventana_AjustesCuenta" />
+        </activity>
+
+        <!-- 5.1.2. VENTANA CAMBIO_CORREO -->
+        <activity
+            android:name=".Ajustes.Ventana_CambioPassword"
+            android:label="Cambio de Contraseña"
+            android:parentActivityName=".Ajustes.Ventana_AjustesCuenta"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ajustes.Ventana_AjustesCuenta" />
+        </activity>
+
+        <!-- 5.1.3. VENTANA BORRAR_USUARIO -->
+        <activity
+            android:name=".Ajustes.Ventana_BorrarUsuario"
+            android:label="Eliminar Cuenta"
+            android:parentActivityName=".Ajustes.Ventana_AjustesCuenta"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ajustes.Ventana_AjustesCuenta" />
+        </activity>
+
+        <!-- 5.1.4. VENTANA MODIFICA_CUENTA -->
+        <activity
+            android:name=".Ajustes.Ventana_AjustesModificar"
+            android:label="Modificar Cuenta"
+            android:parentActivityName=".Ajustes.Ventana_AjustesCuenta"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ajustes.Ventana_AjustesCuenta" />
+        </activity>
+
+        <!-- 6 VENTANA TAREAS -->
+        <activity
+            android:name=".Ventana_Tareas"
+            android:label="Tareas Pendientes"
+            android:parentActivityName=".Ventana_Main"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Main" />
+        </activity>
+
+        <!-- 7 VENTANA NUEVA_TIENDA -->
+        <activity
+            android:name=".Ventana_NewTienda"
+            android:label="Añadir Tienda"
+            android:parentActivityName=".Ventana_Main"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Main" />
+        </activity>
+    </application>
+
+</manifest>

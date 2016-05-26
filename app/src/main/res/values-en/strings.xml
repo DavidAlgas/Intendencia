@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Warehouse</string>
+    <string name="Imgdescript">AppLogo</string>
+    <string name="LblConfirPass">Confirm Password:</string>
+    <string name="LblNuevaPass">Password:</string>
+    <string name="btnCancelar">Cancel</string>
+    <string name="btnRegistrar">Register</string>
+    <string name="lblAlta">Create New User</string>
+    <string name="lblBoton">Login</string>
+    <string name="lblCorreo">User/E-mail</string>
+    <string name="lblIntendencia">Warehouse</string>
+    <string name="lblNuevoCorreo">E-mail:</string>
+    <string name="lblOlvido">Forgot the password</string>
+    <string name="lblPass">Password</string>
+    <string name="lblRecordar">Remember E-mail and Password</string>
+    <string name="menuAcerca">About…</string>
+    <string name="menuDesconectar">Logout</string>
+</resources>

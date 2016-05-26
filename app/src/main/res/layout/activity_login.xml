@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Ventana_Login">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:contentDescription="@string/Imgdescript"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/lblLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:text="@string/lblIntendencia"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="40sp" />
+
+    <EditText
+        android:id="@+id/txtCorreo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblLogo"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/lblCorreo"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtCorreo"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/lblPass"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/checkRecordar"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/checkRecordar"
+        android:background="#ff9900"
+        android:text="@string/lblBoton"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lblOlvidado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnLogin"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnLogin"
+        android:text="@string/lblOlvido"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/lblNuevoUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/lblOlvidado"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/lblAlta"
+        android:textAlignment="center"
+        android:textColor="#000000" />
+
+    <Switch
+        android:id="@+id/checkRecordar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtPassword"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtPassword"
+        android:text="@string/lblRecordar" />
+
+</RelativeLayout>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "369850078830",
+    "firebase_url": "https://intendenciav1.firebaseio.com",
+    "project_id": "intendenciav1",
+    "storage_bucket": "intendenciav1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369850078830:android:14164e266ad2209e",
+        "android_client_info": {
+          "package_name": "com.example.david.intendencia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369850078830-loh98tl9bqqg2ngfv07ofcr3pbj9luco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRs_TEBmqpZu4Zt-Ye0sRpKu5A_u08VTo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

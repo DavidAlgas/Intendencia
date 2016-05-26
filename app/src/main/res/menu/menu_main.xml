@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Ventana_Main">
+
+
+    <item
+        android:id="@+id/Buscar"
+        android:icon="@drawable/icono_buscar"
+        android:orderInCategory="1"
+        android:title="@string/menuBuscar"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/Datos"
+        android:icon="@drawable/icono_datos"
+        android:orderInCategory="2"
+        android:title="@string/menuDatos"
+        app:showAsAction="ifRoom">
+        <menu> <!-- submenú -->
+            <item
+                android:id="@+id/addItems"
+                android:title="@string/menuDatos1" />
+            <item
+                android:id="@+id/addTienda"
+                android:title="@string/menuDatos2" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/tareas"
+        android:orderInCategory="3"
+        android:title="@string/menuTareas"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/ajustes"
+        android:orderInCategory="4"
+        android:title="@string/menuAjustes"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/desconectar"
+        android:orderInCategory="4"
+        android:title="@string/menuDesconectar"
+        app:showAsAction="never" />
+</menu>
