@@ -16,13 +16,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_CambioCorreo extends AppCompatActivity {
 
-    @Bind(R.id.txtCorreoNuevo)
+    @BindView(R.id.txtCorreoNuevo)
     EditText NEWCorreo;
 
     public ProgressDialog progreso;

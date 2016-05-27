@@ -13,12 +13,12 @@ import com.example.david.intendencia.Ajustes.Ventana_Ajustes;
 import com.example.david.intendencia.Tabs.SwipeAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class Ventana_Main extends AppCompatActivity {
 
-    @Bind(R.id.elementoPager)
+    @BindView(R.id.elementoPager)
     ViewPager viewPager;
 
     @Override

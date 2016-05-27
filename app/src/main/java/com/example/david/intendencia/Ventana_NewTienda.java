@@ -25,27 +25,27 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_NewTienda extends AppCompatActivity {
 
-    @Bind(R.id.txtTiendaNombre)
+    @BindView(R.id.txtTiendaNombre)
     EditText TiendaNombre;
-    @Bind(R.id.spnTiendaModelo)
+    @BindView(R.id.spnTiendaModelo)
     Spinner TiendaModelo;
-    @Bind(R.id.spnTiendaTipo)
+    @BindView(R.id.spnTiendaTipo)
     Spinner TiendaTipo;
-    @Bind(R.id.txtTiendaCapacidad)
+    @BindView(R.id.txtTiendaCapacidad)
     EditText TiendaCapacidad;
-    @Bind(R.id.txtTiendaPiquetas)
+    @BindView(R.id.txtTiendaPiquetas)
     EditText TiendaPiquetas;
-    @Bind(R.id.txtTiendaEstado)
+    @BindView(R.id.txtTiendaEstado)
     EditText TiendaEstado;
-    @Bind(R.id.txtTiendaUltima)
+    @BindView(R.id.txtTiendaUltima)
     EditText TiendaUltima;
-    @Bind(R.id.btnNuevaTienda)
+    @BindView(R.id.btnNuevaTienda)
     Button botonAddTienda;
 
     private boolean modificotienda = false;

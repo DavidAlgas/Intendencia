@@ -11,13 +11,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_Olvida extends AppCompatActivity {
 
-    @Bind(R.id.txtCorreoOlvidado)
+    @BindView(R.id.txtCorreoOlvidado)
     EditText ResetCorreo;
 
     @Override

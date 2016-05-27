@@ -28,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -108,11 +108,11 @@ public class tab3 extends Fragment {
 
     // Create a custom ViewHolder
     public class TiendasViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        @Bind(R.id.cvv)
+        @BindView(R.id.cvv)
         CardView fondoTienda;
-        @Bind(R.id.txtLineaTiendaNombre)
+        @BindView(R.id.txtLineaTiendaNombre)
         TextView txtNombre;
-        @Bind(R.id.txtLineaTiendaModelo)
+        @BindView(R.id.txtLineaTiendaModelo)
         TextView txtModelo;
 
         public TiendasViewHolder(View itemView) {

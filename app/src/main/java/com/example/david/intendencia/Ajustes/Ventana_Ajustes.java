@@ -11,13 +11,13 @@ import com.example.david.intendencia.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_Ajustes extends AppCompatActivity {
 
-    @Bind(R.id.lblCuentaActual2)
+    @BindView(R.id.lblCuentaActual2)
     TextView CuentaActual;
 
     @Override

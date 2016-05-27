@@ -14,13 +14,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_AjustesModificar extends AppCompatActivity {
 
-    @Bind(R.id.txtALIAS)
+    @BindView(R.id.txtALIAS)
     EditText txtALIAS;
 
     @Override
