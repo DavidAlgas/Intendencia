@@ -28,16 +28,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_Tareas extends AppCompatActivity {
 
-    @Bind(R.id.ListadoTareas)
+    @BindView(R.id.ListadoTareas)
     RecyclerView listadoRV;
 
-    @Bind(R.id.txtNuevoTarea)
+    @BindView(R.id.txtNuevoTarea)
     EditText NuevaTarea;
 
     private DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tareas");
@@ -112,11 +112,11 @@ public class Ventana_Tareas extends AppCompatActivity {
 
     // Create a custom ViewHolder
     public class TareasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        @Bind(R.id.txtLineaTarea)
+        @BindView(R.id.txtLineaTarea)
         TextView txtItem;
-        @Bind(R.id.txxLineaUsuario)
+        @BindView(R.id.txxLineaUsuario)
         TextView txtUser;
-        @Bind(R.id.imgLineaDone)
+        @BindView(R.id.imgLineaDone)
         ImageView imgDone;
 
         public TareasViewHolder(View itemView) {

@@ -16,12 +16,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_CambioPassword extends AppCompatActivity {
-    @Bind(R.id.txtContraseñaNEW)
+    @BindView(R.id.txtContraseñaNEW)
     EditText passwordNEW;
 
     public ProgressDialog progreso;

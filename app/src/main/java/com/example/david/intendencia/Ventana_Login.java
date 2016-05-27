@@ -17,18 +17,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_Login extends AppCompatActivity {
-    @Bind(R.id.txtCorreo)
+    @BindView(R.id.txtCorreo)
     EditText txtCorreo;
 
-    @Bind(R.id.txtPassword)
+    @BindView(R.id.txtPassword)
     EditText txtPass;
 
-    @Bind(R.id.checkRecordar)
+    @BindView(R.id.checkRecordar)
     Switch checkRecordar;
 
     public ProgressDialog progreso;

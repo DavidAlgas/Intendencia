@@ -16,18 +16,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.crash.FirebaseCrash;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class Ventana_NewUser extends AppCompatActivity {
-    @Bind(R.id.txtNuevoCorreo)
+    @BindView(R.id.txtNuevoCorreo)
     EditText txtNuevoCorreo;
 
-    @Bind(R.id.txtNuevaPass)
+    @BindView(R.id.txtNuevaPass)
     EditText txtNuevaPass;
 
-    @Bind(R.id.txtNuevaPass2)
+    @BindView(R.id.txtNuevaPass2)
     EditText txtNuevaPass2;
 
     private FirebaseAuth mAuth;
