@@ -129,8 +129,8 @@ public class Ventana_Tareas extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            Tarea itemSelec = (Tarea) adaptador.getItem(position);
-            DatabaseReference modificaA = adaptador.getRef(position);
+            Tarea itemSelec = (Tarea) adaptador.getItem(position);         // TAREA SELECCIONADA
+            DatabaseReference modificaA = adaptador.getRef(position);      // REF DDBB TAREA
             boolean completed = !itemSelec.isCompleto();
 
             itemSelec.setCompleto(completed);

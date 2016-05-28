@@ -78,6 +78,7 @@
     <string name="hintTiendaEstado">Estado</string>
     <string name="hintTiendaFecha">Ultima Revisión</string>
     <string name="btnTiendaAdd">Añadir</string>
+    <string name="btnTiendaModify">Modificar</string>
     <string name="btnTiendaFecha">Fecha</string>
     <string name="txtTiendaCapacidad">Capacidad</string>
     <string name="txtTiendaPiquetas">Piquetas</string>

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
@@ -70,7 +71,7 @@ public class Ventana_NewTienda extends AppCompatActivity {
         Bundle tiendaUpdate = getIntent().getExtras();
         if (tiendaUpdate != null) {
             modificotienda = true;
-            botonAddTienda.setText("Editar");
+            botonAddTienda.setText(R.string.btnTiendaModify);
             getSupportActionBar().setTitle("Editar Tienda");
 
             TiendaNombre.setText(tiendaUpdate.getString("TNombre"));
@@ -118,11 +119,10 @@ public class Ventana_NewTienda extends AppCompatActivity {
             Tienda nuevaTienda = new Tienda(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision, LUpdate);
             if (!modificotienda) {
                 ref.push().setValue(nuevaTienda);
+                Toast.makeText(Ventana_NewTienda.this, "Añadido Correctamente", Toast.LENGTH_SHORT).show();
             } else {
                 refUpdate.setValue(nuevaTienda);
             }
-
-            Toast.makeText(Ventana_NewTienda.this, "Añadido Correctamente", Toast.LENGTH_SHORT).show();
             finish();
         }
     }

@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,6 +21,8 @@ import com.example.david.intendencia.Objetos.Tienda;
 import com.example.david.intendencia.R;
 import com.example.david.intendencia.Ventana_NewTienda;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +41,8 @@ public class tab3 extends Fragment {
     private RecyclerView tiendasRV;
     private FirebaseRecyclerAdapter adaptadorTiendas;
     private final DatabaseReference refTiendas = FirebaseDatabase.getInstance().getReference("Tiendas");
-
+    private final DatabaseReference refMorosos = FirebaseDatabase.getInstance().getReference("Morosos");
+    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Nullable
     @Override
@@ -73,7 +75,7 @@ public class tab3 extends Fragment {
         };
 
         // Creamos el listener para ver los eventos
-        ChildEventListener tiendasListener = refTiendas.addChildEventListener(new ChildEventListener() {
+        refTiendas.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 tiendasRV.scrollToPosition(adaptadorTiendas.getItemCount() - 1);
@@ -82,11 +84,13 @@ public class tab3 extends Fragment {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 tiendasRV.scrollToPosition(adaptadorTiendas.getItemCount() - 1);
+                Snackbar.make(tab3, "Tienda Modificada", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 tiendasRV.scrollToPosition(adaptadorTiendas.getItemCount() - 1);
+                Snackbar.make(tab3, "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
@@ -139,17 +143,33 @@ public class tab3 extends Fragment {
             final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
 
             switch (item.getOrder()) {
+                // OPCION TOMAR ITEM
                 case 0:
                     if (tiendaSelecc.isDisponible()) {
-                        tiendaSelecc.setDisponible(false);
 
+                        // Marcadmos como NO DISPONIBLE esa tienda
+                        tiendaSelecc.setDisponible(false);
                         Map<String, Object> updates = new HashMap<>();
                         updates.put("disponible", false);
+
+                        //Añadimos a la persona a la lista de morosos con lo que debe
+                        String ID = "", QUIEN = "";
+                        if (user != null) {
+                            ID = user.getUid();
+                            if (user.getDisplayName() == null) {
+                                QUIEN = user.getEmail();
+                            } else {
+                                QUIEN = user.getDisplayName();
+                            }
+                        }
+
+                        refMorosos.child(ID).child(QUIEN).setValue(rutaTienda.getKey());
                         rutaTienda.updateChildren(updates);
                     } else {
                         Snackbar.make(itemView, "Tienda NO disponible", Snackbar.LENGTH_LONG).show();
                     }
                     return true;
+                // OPCION EDITAR ITEM
                 case 1:
                     // Editar Tienda.
                     Intent intent = new Intent(getActivity(), Ventana_NewTienda.class);
@@ -163,13 +183,14 @@ public class tab3 extends Fragment {
                     intent.putExtra("Referencia", rutaTienda.getKey());
                     startActivity(intent);
                     return true;
+                // OPCION ELIMINAR ITEM
                 case 2:
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage("¿Borrar: " + tiendaSelecc.getNombre() + "?").setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             rutaTienda.removeValue();
-                            Snackbar.make(itemView, "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
+                            //Snackbar.make(itemView, "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
@@ -181,7 +202,5 @@ public class tab3 extends Fragment {
             }
             return false;
         }
-
-
     }
 }
