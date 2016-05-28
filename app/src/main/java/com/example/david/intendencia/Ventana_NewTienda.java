@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.david.intendencia.Objetos.Tienda;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -49,8 +51,11 @@ public class Ventana_NewTienda extends AppCompatActivity {
     Button botonAddTienda;
 
     private boolean modificotienda = false;
-    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tiendas");
-    private DatabaseReference refUpdate = null;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tiendas");
+    private DatabaseReference refUpdate;
+    private Locale locale = new Locale("es", "ES");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'a las' HH:mm:ss", locale);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +83,9 @@ public class Ventana_NewTienda extends AppCompatActivity {
             TiendaEstado.setText(tiendaUpdate.getString("TEstado"));
             TiendaUltima.setText(tiendaUpdate.getString("TFecha"));
 
-            // FALTA LA REFERANCIA AL OBJETO DE LA BASE DE DATOS
-            //refUpdate = tiendaUpdate.getString("Referencia");
+            String path = tiendaUpdate.getString("Referencia");
+            assert path != null;
+            refUpdate = ref.child(path);
         }
     }
 
@@ -97,10 +103,16 @@ public class Ventana_NewTienda extends AppCompatActivity {
         String Estado = TiendaEstado.getText().toString();
         String Revision = TiendaUltima.getText().toString();
 
-        // Añadimos la fecha con la ultima modificacion
-        Locale locale = new Locale("es", "ES");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'a las' HH:mm", locale);
+        // Log con el usuario que lo edito y la fecha
         String LUpdate = sdf.format(new Date());
+        if (user != null) {
+            if (user.getDisplayName() == null) {
+                LUpdate += " por " + user.getEmail();
+            } else {
+                LUpdate += " por " + user.getDisplayName();
+            }
+        }
+
 
         if (VALIDATOR(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision)) {
             Tienda nuevaTienda = new Tienda(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision, LUpdate);

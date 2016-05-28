@@ -1,6 +1,7 @@
 package com.example.david.intendencia.Tabs;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.david.intendencia.Objetos.Tienda;
 import com.example.david.intendencia.R;
+import com.example.david.intendencia.Ventana_NewTienda;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,13 +39,13 @@ public class tab3 extends Fragment {
 
     private RecyclerView tiendasRV;
     private FirebaseRecyclerAdapter adaptadorTiendas;
-    private DatabaseReference refTiendas = FirebaseDatabase.getInstance().getReference("Tiendas");
+    private final DatabaseReference refTiendas = FirebaseDatabase.getInstance().getReference("Tiendas");
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View tab3 = inflater.inflate(R.layout.tab03, container, false);
+        final View tab3 = inflater.inflate(R.layout.tab03, container, false);
 
         tiendasRV = (RecyclerView) tab3.findViewById(R.id.ListadoTiendas);
 
@@ -101,11 +104,6 @@ public class tab3 extends Fragment {
         return tab3;
     }
 
-    public void cargarTiendas() {
-
-
-    }
-
     // Create a custom ViewHolder
     public class TiendasViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         @Bind(R.id.cvv)
@@ -137,42 +135,40 @@ public class tab3 extends Fragment {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             int position = getAdapterPosition();
-            Tienda tiendaSeleccionada = (Tienda) adaptadorTiendas.getItem(position);
+            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
+            final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
 
             switch (item.getOrder()) {
                 case 0:
-                    if (tiendaSeleccionada.isDisponible()) {
-                        DatabaseReference disponible = adaptadorTiendas.getRef(position);
-                        tiendaSeleccionada.setDisponible(false);
+                    if (tiendaSelecc.isDisponible()) {
+                        tiendaSelecc.setDisponible(false);
 
                         Map<String, Object> updates = new HashMap<>();
                         updates.put("disponible", false);
-                        disponible.updateChildren(updates);
+                        rutaTienda.updateChildren(updates);
                     } else {
                         Snackbar.make(itemView, "Tienda NO disponible", Snackbar.LENGTH_LONG).show();
                     }
                     return true;
                 case 1:
                     // Editar Tienda.
-                    /*Intent intent = new Intent(tab3.this, Ventana_NewTienda.class);
-                    intent.putExtra("TNombre", tiendaSeleccionada.getNombre());
-                    intent.putExtra("TModelo", tiendaSeleccionada.getModelo());
-                    intent.putExtra("TTipo", tiendaSeleccionada.getTipo());
-                    intent.putExtra("TCapacidad", tiendaSeleccionada.getCapacidad());
-                    intent.putExtra("TPiquetas", tiendaSeleccionada.getNpiquetas());
-                    intent.putExtra("TEstado", tiendaSeleccionada.getEstado());
-                    intent.putExtra("TFecha", tiendaSeleccionada.getUltimaRevision());
-                    intent.putExtra("Referencia", String.valueOf(adaptadorTiendas.getRef(position)));
-                    startActivity(intent);*/
+                    Intent intent = new Intent(getActivity(), Ventana_NewTienda.class);
+                    intent.putExtra("TNombre", tiendaSelecc.getNombre());
+                    intent.putExtra("TModelo", tiendaSelecc.getModelo());
+                    intent.putExtra("TTipo", tiendaSelecc.getTipo());
+                    intent.putExtra("TCapacidad", tiendaSelecc.getCapacidad());
+                    intent.putExtra("TPiquetas", tiendaSelecc.getNpiquetas());
+                    intent.putExtra("TEstado", tiendaSelecc.getEstado());
+                    intent.putExtra("TFecha", tiendaSelecc.getUltimaRevision());
+                    intent.putExtra("Referencia", rutaTienda.getKey());
+                    startActivity(intent);
                     return true;
                 case 2:
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage("¿Borrar: " + tiendaSeleccionada.getNombre() + "?").setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    builder.setMessage("¿Borrar: " + tiendaSelecc.getNombre() + "?").setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            int position = getAdapterPosition();
-                            DatabaseReference borrarA = adaptadorTiendas.getRef(position);
-                            borrarA.removeValue();
+                            rutaTienda.removeValue();
                             Snackbar.make(itemView, "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {

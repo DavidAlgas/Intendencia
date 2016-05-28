@@ -9,13 +9,13 @@ public class Tienda {
     private String npiquetas;
     private String estado;
     private String ultimaRevision;
-    private String lastUpdate;
+    private String logUpdate;
     private boolean disponible;
 
     public Tienda() {
     }
 
-    public Tienda(String nombre, String modelo, String tipo, String capacidad, String npiquetas, String estado, String ultimaRevision, String lastUpdate) {
+    public Tienda(String nombre, String modelo, String tipo, String capacidad, String npiquetas, String estado, String ultimaRevision, String logUpdate) {
         this.nombre = nombre;
         this.modelo = modelo;
         this.tipo = tipo;
@@ -23,7 +23,7 @@ public class Tienda {
         this.npiquetas = npiquetas;
         this.estado = estado;
         this.ultimaRevision = ultimaRevision;
-        this.lastUpdate = lastUpdate;
+        this.logUpdate = logUpdate;
         this.disponible = true;
     }
 
@@ -83,12 +83,12 @@ public class Tienda {
         this.ultimaRevision = ultimaRevision;
     }
 
-    public String getLastUpdate() {
-        return lastUpdate;
+    public String getLogUpdate() {
+        return logUpdate;
     }
 
-    public void setLastUpdate(String lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLogUpdate(String logUpdate) {
+        this.logUpdate = logUpdate;
     }
 
     public boolean isDisponible() {
