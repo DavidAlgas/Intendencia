@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.david.intendencia.Objetos.Moroso;
 import com.example.david.intendencia.Objetos.Tienda;
 import com.example.david.intendencia.R;
 import com.example.david.intendencia.Ventana_NewTienda;
@@ -28,8 +29,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -126,13 +130,26 @@ public class tab3 extends Fragment {
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             //menu.add(groupId, itemId, order, title)
-            MenuItem accion0 = menu.add(0, v.getId(), 0, "Tomar Prestada");
-            accion0.setOnMenuItemClickListener(this);
+            int position = getAdapterPosition();
+            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
+            final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
+            String ID = "";
+            if (user != null) {
+                ID = user.getUid();
+            }
 
-            MenuItem accion1 = menu.add(0, v.getId(), 1, "Editar");
+            if (tiendaSelecc.getPoseedor().equals(ID)) {
+                MenuItem accion0 = menu.add(0, v.getId(), 1, "Devolver");
+                accion0.setOnMenuItemClickListener(this);
+            } else {
+                MenuItem accion0 = menu.add(0, v.getId(), 0, "Tomar Prestada");
+                accion0.setOnMenuItemClickListener(this);
+            }
+
+            MenuItem accion1 = menu.add(0, v.getId(), 2, "Editar");
             accion1.setOnMenuItemClickListener(this);
 
-            MenuItem accion2 = menu.add(0, v.getId(), 2, "Eliminar");
+            MenuItem accion2 = menu.add(0, v.getId(), 3, "Eliminar");
             accion2.setOnMenuItemClickListener(this);
         }
 
@@ -141,36 +158,32 @@ public class tab3 extends Fragment {
             int position = getAdapterPosition();
             final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
             final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
+            //ALMACENAMOS EL ID DE LA PERSONA Y UN NOMBRE DE USUARIO
+            String ID = "", QUIEN = "";
+            if (user != null) {
+                ID = user.getUid();
+                if (user.getDisplayName() == null) {
+                    QUIEN = user.getEmail();
+                } else {
+                    QUIEN = user.getDisplayName();
+                }
+            }
 
             switch (item.getOrder()) {
                 // OPCION TOMAR ITEM
                 case 0:
                     if (tiendaSelecc.isDisponible()) {
-
-                        // Marcadmos como NO DISPONIBLE esa tienda
-                        tiendaSelecc.setDisponible(false);
-                        Map<String, Object> updates = new HashMap<>();
-                        updates.put("disponible", false);
-
-                        //Añadimos a la persona a la lista de morosos con lo que debe
-                        String ID = "", QUIEN = "";
-                        if (user != null) {
-                            ID = user.getUid();
-                            if (user.getDisplayName() == null) {
-                                QUIEN = user.getEmail();
-                            } else {
-                                QUIEN = user.getDisplayName();
-                            }
-                        }
-
-                        refMorosos.child(ID).child(QUIEN).setValue(rutaTienda.getKey());
-                        rutaTienda.updateChildren(updates);
+                        ADD_TIENDA_MOROSO(tiendaSelecc, rutaTienda, ID, QUIEN);
                     } else {
                         Snackbar.make(itemView, "Tienda NO disponible", Snackbar.LENGTH_LONG).show();
                     }
                     return true;
-                // OPCION EDITAR ITEM
+                // OPCION DEVOLVER ITEM
                 case 1:
+                    DEL_TIENDA_MOROSO(tiendaSelecc, rutaTienda, ID, QUIEN);
+                    return true;
+                // OPCION EDITAR ITEM
+                case 2:
                     // Editar Tienda.
                     Intent intent = new Intent(getActivity(), Ventana_NewTienda.class);
                     intent.putExtra("TNombre", tiendaSelecc.getNombre());
@@ -180,11 +193,12 @@ public class tab3 extends Fragment {
                     intent.putExtra("TPiquetas", tiendaSelecc.getNpiquetas());
                     intent.putExtra("TEstado", tiendaSelecc.getEstado());
                     intent.putExtra("TFecha", tiendaSelecc.getUltimaRevision());
+                    intent.putExtra("IDisponibilidad", tiendaSelecc.isDisponible());
                     intent.putExtra("Referencia", rutaTienda.getKey());
                     startActivity(intent);
                     return true;
                 // OPCION ELIMINAR ITEM
-                case 2:
+                case 3:
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage("¿Borrar: " + tiendaSelecc.getNombre() + "?").setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
@@ -202,5 +216,86 @@ public class tab3 extends Fragment {
             }
             return false;
         }
+    }
+
+    // METODO PARA AÑADIR LA NUEVA TIENDA A LA LISTA DEL MOROSO
+    public void ADD_TIENDA_MOROSO(Tienda tiendaSelecc, final DatabaseReference rutaTienda, String ID, String QUIEN) {
+        // Marcamos como NO DISPONIBLE esa tienda y le asignamos poseedor
+        tiendaSelecc.setDisponible(false);
+        tiendaSelecc.setPoseedor(ID);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("poseedor", ID);
+        updates.put("disponible", false);
+        rutaTienda.updateChildren(updates);
+
+
+        // LO EJECUTAMOS 1 VEZ
+        final String finalID = ID, finalQUIEN = QUIEN;
+        refMorosos.child(ID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // COMPROBAMOS SI EXITE EL MOROSO
+                if (dataSnapshot.exists()) {
+                    //Si exite ese usuario le añadimos la nueva tienda
+                    Moroso moroso = dataSnapshot.getValue(Moroso.class);
+                    List<String> listaAdd = moroso.getIDTIENDA();
+                    listaAdd.add(rutaTienda.getKey());
+
+                    Moroso morodoUpdate = new Moroso(finalQUIEN, listaAdd);
+                    refMorosos.child(finalID).setValue(morodoUpdate);
+                } else {
+                    // Si no exite ese moroso lo creamos y le añadimos la tienda.
+                    List<String> listaNew = new ArrayList<>();
+                    listaNew.add(rutaTienda.getKey());
+                    Moroso moroso = new Moroso(finalQUIEN, listaNew);
+                    refMorosos.child(finalID).setValue(moroso);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    // METODO PARA DEVOLVER LA TIENDA
+    public void DEL_TIENDA_MOROSO(Tienda tiendaSelecc, final DatabaseReference rutaTienda, String ID, String QUIEN) {
+        // Marcamos como DISPONIBLE esa tienda y le eliminamos poseedor
+        tiendaSelecc.setDisponible(true);
+        tiendaSelecc.setPoseedor("Nadie");
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("poseedor", "Nadie");
+        updates.put("disponible", true);
+        rutaTienda.updateChildren(updates);
+
+        // LO EJECUTAMOS 1 VEZ
+        final String finalID = ID, finalQUIEN = QUIEN;
+        refMorosos.child(ID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // RECORREMOS EL ARRAY Y ELIMINAMOS LA TIENDA
+                Moroso exitente = dataSnapshot.getValue(Moroso.class);
+                List<String> listaDel = exitente.getIDTIENDA();
+
+                for (int a = 0; a < listaDel.size(); a++) {
+                    if (listaDel.contains(rutaTienda.getKey())) {
+                        listaDel.remove(a);
+                        break;
+                    }
+                }
+
+                // Si la lista esta vacia eliminamos la entrada entra para ahorrar espacio de BD
+                if (listaDel.isEmpty()) {
+                    refMorosos.child(finalID).removeValue();
+                } else {
+                    Moroso morodoUpdate = new Moroso(finalQUIEN, listaDel);
+                    refMorosos.child(finalID).setValue(morodoUpdate);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

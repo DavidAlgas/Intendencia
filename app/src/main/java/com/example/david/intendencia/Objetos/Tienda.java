@@ -10,12 +10,13 @@ public class Tienda {
     private String estado;
     private String ultimaRevision;
     private String logUpdate;
+    private String poseedor = "Nadie";
     private boolean disponible;
 
     public Tienda() {
     }
 
-    public Tienda(String nombre, String modelo, String tipo, String capacidad, String npiquetas, String estado, String ultimaRevision, String logUpdate) {
+    public Tienda(String nombre, String modelo, String tipo, String capacidad, String npiquetas, String estado, String ultimaRevision, String logUpdate, boolean disponible) {
         this.nombre = nombre;
         this.modelo = modelo;
         this.tipo = tipo;
@@ -24,7 +25,7 @@ public class Tienda {
         this.estado = estado;
         this.ultimaRevision = ultimaRevision;
         this.logUpdate = logUpdate;
-        this.disponible = true;
+        this.disponible = disponible;
     }
 
     public String getNombre() {
@@ -97,5 +98,13 @@ public class Tienda {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public String getPoseedor() {
+        return poseedor;
+    }
+
+    public void setPoseedor(String poseedor) {
+        this.poseedor = poseedor;
     }
 }

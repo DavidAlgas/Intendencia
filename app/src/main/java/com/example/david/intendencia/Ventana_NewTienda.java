@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
@@ -52,6 +51,7 @@ public class Ventana_NewTienda extends AppCompatActivity {
     Button botonAddTienda;
 
     private boolean modificotienda = false;
+    private boolean Disponible = true;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tiendas");
     private DatabaseReference refUpdate;
@@ -83,6 +83,7 @@ public class Ventana_NewTienda extends AppCompatActivity {
             TiendaPiquetas.setText(tiendaUpdate.getString("TPiquetas"));
             TiendaEstado.setText(tiendaUpdate.getString("TEstado"));
             TiendaUltima.setText(tiendaUpdate.getString("TFecha"));
+            Disponible = tiendaUpdate.getBoolean("IDisponibilidad");
 
             String path = tiendaUpdate.getString("Referencia");
             assert path != null;
@@ -116,11 +117,13 @@ public class Ventana_NewTienda extends AppCompatActivity {
 
 
         if (VALIDATOR(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision)) {
-            Tienda nuevaTienda = new Tienda(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision, LUpdate);
+            Tienda nuevaTienda;
             if (!modificotienda) {
+                nuevaTienda = new Tienda(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision, LUpdate, Disponible);
                 ref.push().setValue(nuevaTienda);
                 Toast.makeText(Ventana_NewTienda.this, "Añadido Correctamente", Toast.LENGTH_SHORT).show();
             } else {
+                nuevaTienda = new Tienda(Nombre, Modelo, Tipo, Capacidad, Piquetas, Estado, Revision, LUpdate, Disponible);
                 refUpdate.setValue(nuevaTienda);
             }
             finish();
