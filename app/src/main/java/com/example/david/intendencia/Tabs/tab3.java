@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.david.intendencia.Objetos.Moroso;
@@ -63,6 +64,18 @@ public class tab3 extends Fragment {
             protected void populateViewHolder(TiendasViewHolder holder, Tienda tienda, int i) {
                 holder.txtNombre.setText(tienda.getNombre());
                 holder.txtModelo.setText(tienda.getModelo());
+                holder.ulltimaRevision.setText(tienda.getUltimaRevision());
+
+                // MOSTRAMOS IMAGEN SEGUN MODELO
+                switch (tienda.getModelo()) {
+                    case "Canadiense":
+                        holder.imgTienda.setImageResource(R.drawable.canadiense);
+                        break;
+                    case "Canadiense/Batisielles":
+                        holder.imgTienda.setImageResource(R.drawable.batisielles);
+                        break;
+                }
+
 
                 if (tienda.isDisponible()) {
                     holder.fondoTienda.setBackgroundColor(0xffffffff);
@@ -87,13 +100,11 @@ public class tab3 extends Fragment {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                tiendasRV.scrollToPosition(adaptadorTiendas.getItemCount() - 1);
                 Snackbar.make(tab3, "Tienda Modificada", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                tiendasRV.scrollToPosition(adaptadorTiendas.getItemCount() - 1);
                 Snackbar.make(tab3, "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
             }
 
@@ -120,6 +131,10 @@ public class tab3 extends Fragment {
         TextView txtNombre;
         @Bind(R.id.txtLineaTiendaModelo)
         TextView txtModelo;
+        @Bind(R.id.imgLineaTienda)
+        ImageView imgTienda;
+        @Bind(R.id.txtLineaUltimaRevision)
+        TextView ulltimaRevision;
 
         public TiendasViewHolder(View itemView) {
             super(itemView);
@@ -132,7 +147,6 @@ public class tab3 extends Fragment {
             //menu.add(groupId, itemId, order, title)
             int position = getAdapterPosition();
             final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
-            final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
             String ID = "";
             if (user != null) {
                 ID = user.getUid();
