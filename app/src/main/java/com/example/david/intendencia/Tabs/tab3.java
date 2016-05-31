@@ -74,8 +74,10 @@ public class tab3 extends Fragment {
                     case "Canadiense/Batisielles":
                         holder.imgTienda.setImageResource(R.drawable.batisielles);
                         break;
+                    case "Pabellón":
+                        holder.imgTienda.setImageResource(R.drawable.pabellon);
+                        break;
                 }
-
 
                 if (tienda.isDisponible()) {
                     holder.fondoTienda.setBackgroundColor(0xffffffff);
@@ -95,17 +97,22 @@ public class tab3 extends Fragment {
         refTiendas.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                tiendasRV.scrollToPosition(adaptadorTiendas.getItemCount() - 1);
+                tiendasRV.scrollToPosition(0);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Snackbar.make(tab3, "Tienda Modificada", Snackbar.LENGTH_LONG).show();
+                if (getView() != null) {
+                    Snackbar.make(getView(), "Tienda Modificada", Snackbar.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Snackbar.make(tab3, "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
+                if (getView() != null) {
+                    Snackbar.make(getView(), "Tienda Eliminada", Snackbar.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -289,21 +296,22 @@ public class tab3 extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // RECORREMOS EL ARRAY Y ELIMINAMOS LA TIENDA
                 Moroso exitente = dataSnapshot.getValue(Moroso.class);
-                List<String> listaDel = exitente.getIDTIENDA();
-
-                for (int a = 0; a < listaDel.size(); a++) {
-                    if (listaDel.contains(rutaTienda.getKey())) {
-                        listaDel.remove(a);
-                        break;
+                if (exitente != null) {
+                    List<String> listaDel = exitente.getIDTIENDA();
+                    for (int a = 0; a < listaDel.size(); a++) {
+                        if (listaDel.contains(rutaTienda.getKey())) {
+                            listaDel.remove(a);
+                            break;
+                        }
                     }
-                }
 
-                // Si la lista esta vacia eliminamos la entrada entra para ahorrar espacio de BD
-                if (listaDel.isEmpty()) {
-                    refMorosos.child(finalID).removeValue();
-                } else {
-                    Moroso morodoUpdate = new Moroso(finalQUIEN, listaDel);
-                    refMorosos.child(finalID).setValue(morodoUpdate);
+                    // Si la lista esta vacia eliminamos la entrada entra para ahorrar espacio de BD
+                    if (listaDel.isEmpty()) {
+                        refMorosos.child(finalID).removeValue();
+                    } else {
+                        Moroso morodoUpdate = new Moroso(finalQUIEN, listaDel);
+                        refMorosos.child(finalID).setValue(morodoUpdate);
+                    }
                 }
             }
 
