@@ -60,7 +60,8 @@
         android:layout_toStartOf="@+id/btnFecha"
         android:editable="false"
         android:ems="10"
-        android:hint="@string/hintTiendaFecha" />
+        android:hint="@string/hintTiendaFecha"
+        android:inputType="none" />
 
     <Button
         android:id="@+id/btnNuevaTienda"
@@ -70,6 +71,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:background="#428bca"
+        android:foreground="?selectableItemBackground"
         android:text="@string/btnTiendaAdd"
         android:textStyle="bold" />
 
@@ -80,6 +82,7 @@
         android:layout_alignEnd="@+id/txtTiendaPiquetas"
         android:layout_below="@+id/txtTiendaEstado"
         android:background="#37BC9B"
+        android:foreground="?selectableItemBackground"
         android:text="@string/btnTiendaFecha" />
 
     <Spinner

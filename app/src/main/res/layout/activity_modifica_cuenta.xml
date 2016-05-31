@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#428bca"
+        android:foreground="?selectableItemBackground"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="Modificar Alias" />

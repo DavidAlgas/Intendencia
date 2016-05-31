@@ -57,21 +57,23 @@
         android:id="@+id/btnAceptar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="#428bca"
-        android:text="@string/btnRegistrar"
-        android:textStyle="bold"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:background="#428bca"
+        android:foreground="?selectableItemBackground"
+        android:text="@string/btnRegistrar"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnCancelar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="#d9534f"
-        android:text="@string/btnCancelar"
-        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/btnAceptar"
-        android:layout_alignParentEnd="true" />
+        android:background="#d9534f"
+        android:foreground="?selectableItemBackground"
+        android:text="@string/btnCancelar"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/lblNuevaPass2"

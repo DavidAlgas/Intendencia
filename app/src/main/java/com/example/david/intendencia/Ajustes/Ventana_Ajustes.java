@@ -17,8 +17,10 @@ import butterknife.OnClick;
 
 public class Ventana_Ajustes extends AppCompatActivity {
 
-    @Bind(R.id.lblCuentaActual2)
-    TextView CuentaActual;
+    @Bind(R.id.lblCuentaActualCorreo)
+    TextView CuentaActualCorreo;
+    @Bind(R.id.lblCuentaActualAlias)
+    TextView CuentaActualAlias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +30,12 @@ public class Ventana_Ajustes extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            if (user.getDisplayName() == null) {
-                CuentaActual.setText((String) user.getEmail());
+            if (user.getDisplayName() == null || user.getDisplayName().isEmpty()) {
+                CuentaActualAlias.setText(user.getEmail());
+                CuentaActualCorreo.setText("");
             } else {
-                CuentaActual.setText((String) user.getDisplayName());
+                CuentaActualAlias.setText(user.getDisplayName());
+                CuentaActualCorreo.setText(user.getEmail());
             }
         }
 

@@ -66,6 +66,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/checkRecordar"
         android:background="#ff9900"
+        android:foreground="?selectableItemBackground"
         android:text="@string/lblBoton"
         android:textStyle="bold" />
 

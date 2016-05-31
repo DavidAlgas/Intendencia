@@ -46,6 +46,7 @@
         android:layout_below="@+id/txtCorreoOlvidado"
         android:layout_centerHorizontal="true"
         android:background="#428bca"
+        android:foreground="?selectableItemBackground"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/btnReset" />

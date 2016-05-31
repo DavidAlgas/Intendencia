@@ -87,6 +87,7 @@
         <item>- Seleccione Modelo -</item>
         <item>Canadiense</item>
         <item>Canadiense/Batisielles</item>
+        <item>Pabellón</item>
     </string-array>
     <string-array name="tipo_tienda">
         <item>- Seleccione Tipo -</item>
