@@ -68,26 +68,29 @@ public class Ventana_NewTienda extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         //Cuando editamos un seteamos los valores en los campos
-        Bundle tiendaUpdate = getIntent().getExtras();
-        if (tiendaUpdate != null) {
+        Bundle intentUpdate = getIntent().getExtras();
+        if (intentUpdate != null) {
             modificotienda = true;
             botonAddTienda.setText(R.string.btnTiendaModify);
             getSupportActionBar().setTitle("Editar Tienda");
 
-            TiendaNombre.setText(tiendaUpdate.getString("TNombre"));
-            ArrayAdapter spn1 = (ArrayAdapter) TiendaModelo.getAdapter();
-            TiendaModelo.setSelection(spn1.getPosition(tiendaUpdate.getString("TModelo")));
-            ArrayAdapter spn2 = (ArrayAdapter) TiendaTipo.getAdapter();
-            TiendaTipo.setSelection(spn2.getPosition(tiendaUpdate.getString("TTipo")));
-            TiendaCapacidad.setText(tiendaUpdate.getString("TCapacidad"));
-            TiendaPiquetas.setText(tiendaUpdate.getString("TPiquetas"));
-            TiendaEstado.setText(tiendaUpdate.getString("TEstado"));
-            TiendaUltima.setText(tiendaUpdate.getString("TFecha"));
-            Disponible = tiendaUpdate.getBoolean("IDisponibilidad");
+            Tienda editaTienda = (Tienda) intentUpdate.getSerializable("Objeto");
+            if (editaTienda != null) {
+                TiendaNombre.setText(editaTienda.getNombre());
+                ArrayAdapter spn1 = (ArrayAdapter) TiendaModelo.getAdapter();
+                TiendaModelo.setSelection(spn1.getPosition(editaTienda.getModelo()));
+                ArrayAdapter spn2 = (ArrayAdapter) TiendaTipo.getAdapter();
+                TiendaTipo.setSelection(spn2.getPosition(editaTienda.getTipo()));
+                TiendaCapacidad.setText(editaTienda.getCapacidad());
+                TiendaPiquetas.setText(editaTienda.getNpiquetas());
+                TiendaEstado.setText(editaTienda.getEstado());
+                TiendaUltima.setText(editaTienda.getUltimaRevision());
+                Disponible = editaTienda.isDisponible();
 
-            String path = tiendaUpdate.getString("Referencia");
-            assert path != null;
-            refUpdate = ref.child(path);
+                String path = intentUpdate.getString("Referencia");
+                assert path != null;
+                refUpdate = ref.child(path);
+            }
         }
     }
 

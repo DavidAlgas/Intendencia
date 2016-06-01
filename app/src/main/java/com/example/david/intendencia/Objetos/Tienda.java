@@ -1,6 +1,8 @@
 package com.example.david.intendencia.Objetos;
 
-public class Tienda {
+import java.io.Serializable;
+
+public class Tienda implements Serializable{
 
     private String nombre;
     private String modelo;

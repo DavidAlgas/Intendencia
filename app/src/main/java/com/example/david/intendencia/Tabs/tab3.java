@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.david.intendencia.Objetos.Moroso;
 import com.example.david.intendencia.Objetos.Tienda;
 import com.example.david.intendencia.R;
+import com.example.david.intendencia.Ventana_InfoTienda;
 import com.example.david.intendencia.Ventana_NewTienda;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +72,7 @@ public class tab3 extends Fragment {
                     case "Canadiense":
                         holder.imgTienda.setImageResource(R.drawable.canadiense);
                         break;
-                    case "Canadiense/Batisielles":
+                    case "Batisielles":
                         holder.imgTienda.setImageResource(R.drawable.batisielles);
                         break;
                     case "Pabellón":
@@ -131,7 +132,7 @@ public class tab3 extends Fragment {
     }
 
     // Create a custom ViewHolder
-    public class TiendasViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
+    public class TiendasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         @Bind(R.id.cvv)
         CardView fondoTienda;
         @Bind(R.id.txtLineaTiendaNombre)
@@ -146,14 +147,14 @@ public class tab3 extends Fragment {
         public TiendasViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             //menu.add(groupId, itemId, order, title)
-            int position = getAdapterPosition();
-            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
+            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(getAdapterPosition());
             String ID = "";
             if (user != null) {
                 ID = user.getUid();
@@ -179,6 +180,7 @@ public class tab3 extends Fragment {
             int position = getAdapterPosition();
             final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
             final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
+
             //ALMACENAMOS EL ID DE LA PERSONA Y UN NOMBRE DE USUARIO
             String ID = "", QUIEN = "";
             if (user != null) {
@@ -207,14 +209,7 @@ public class tab3 extends Fragment {
                 case 2:
                     // Editar Tienda.
                     Intent intent = new Intent(getActivity(), Ventana_NewTienda.class);
-                    intent.putExtra("TNombre", tiendaSelecc.getNombre());
-                    intent.putExtra("TModelo", tiendaSelecc.getModelo());
-                    intent.putExtra("TTipo", tiendaSelecc.getTipo());
-                    intent.putExtra("TCapacidad", tiendaSelecc.getCapacidad());
-                    intent.putExtra("TPiquetas", tiendaSelecc.getNpiquetas());
-                    intent.putExtra("TEstado", tiendaSelecc.getEstado());
-                    intent.putExtra("TFecha", tiendaSelecc.getUltimaRevision());
-                    intent.putExtra("IDisponibilidad", tiendaSelecc.isDisponible());
+                    intent.putExtra("Objeto", tiendaSelecc);
                     intent.putExtra("Referencia", rutaTienda.getKey());
                     startActivity(intent);
                     return true;
@@ -236,6 +231,17 @@ public class tab3 extends Fragment {
                     return true;
             }
             return false;
+        }
+
+        @Override
+        public void onClick(View v) {
+            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(getAdapterPosition());
+            final DatabaseReference rutaTienda = adaptadorTiendas.getRef(getAdapterPosition());
+
+            Intent intent = new Intent(getActivity(), Ventana_InfoTienda.class);
+            intent.putExtra("Objeto", tiendaSelecc);
+            intent.putExtra("Referencia", rutaTienda.getKey());
+            startActivity(intent);
         }
     }
 

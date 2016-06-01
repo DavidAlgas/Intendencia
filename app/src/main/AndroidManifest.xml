@@ -153,6 +153,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Ventana_Main" />
         </activity>
+
+        <!-- 7 VENTANA NUEVA_TIENDA -->
+        <activity
+            android:name=".Ventana_InfoTienda"
+            android:label="Información Tienda"
+            android:parentActivityName=".Ventana_Main"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Main" />
+        </activity>
     </application>
 
 </manifest>

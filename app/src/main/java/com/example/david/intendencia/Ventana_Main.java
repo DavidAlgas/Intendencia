@@ -33,6 +33,11 @@ public class Ventana_Main extends AppCompatActivity {
         viewPager.setAdapter(swipeAdapter);
     }
 
+    public void onDestroy() {
+        FirebaseAuth.getInstance().signOut();
+        super.onDestroy();
+    }
+
 
     //--------------------------------------------------------------------------------------------
     //-------------------------------------- MENU ------------------------------------------------

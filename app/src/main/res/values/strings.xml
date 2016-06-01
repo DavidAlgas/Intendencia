@@ -83,10 +83,13 @@
     <string name="txtTiendaCapacidad">Capacidad</string>
     <string name="txtTiendaPiquetas">Piquetas</string>
 
+    //Strings del layout Info Tienda
+    <string name="imageAttribute">Imagen Tienda</string>
+
     <string-array name="modelo_tienda">
         <item>- Seleccione Modelo -</item>
         <item>Canadiense</item>
-        <item>Canadiense/Batisielles</item>
+        <item>Batisielles</item>
         <item>Pabellón</item>
     </string-array>
     <string-array name="tipo_tienda">
