@@ -2,7 +2,7 @@ package com.example.david.intendencia.Objetos;
 
 import java.io.Serializable;
 
-public class Tienda implements Serializable{
+public class Tienda implements Serializable {
 
     private String nombre;
     private String modelo;
@@ -12,7 +12,8 @@ public class Tienda implements Serializable{
     private String estado;
     private String ultimaRevision;
     private String logUpdate;
-    private String poseedor = "Nadie";
+    private String poseedorID = "Nadie";
+    private String poseedorNombre = "Nadie";
     private boolean disponible;
 
     public Tienda() {
@@ -102,11 +103,19 @@ public class Tienda implements Serializable{
         this.disponible = disponible;
     }
 
-    public String getPoseedor() {
-        return poseedor;
+    public String getPoseedorID() {
+        return poseedorID;
     }
 
-    public void setPoseedor(String poseedor) {
-        this.poseedor = poseedor;
+    public void setPoseedorID(String poseedorID) {
+        this.poseedorID = poseedorID;
+    }
+
+    public String getPoseedorNombre() {
+        return poseedorNombre;
+    }
+
+    public void setPoseedorNombre(String poseedorNombre) {
+        this.poseedorNombre = poseedorNombre;
     }
 }

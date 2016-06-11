@@ -15,34 +15,35 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:hint="@string/hintTiendaNombre" />
+        android:hint="@string/hintTiendaNombre"
+        android:maxLength="50" />
 
     <EditText
         android:id="@+id/txtTiendaCapacidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/spnTiendaTipo"
-        android:layout_alignStart="@+id/btnNuevaTienda"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/spnTiendaTipo"
         android:ems="10"
         android:hint="@string/hintTiendaCapacidad"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="2" />
 
     <EditText
         android:id="@+id/txtTiendaPiquetas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtTiendaCapacidad"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/txtTiendaCapacidad"
-        android:layout_toEndOf="@+id/btnNuevaTienda"
         android:ems="10"
         android:hint="@string/hintTiendaPiquetas"
-        android:inputType="number" />
+        android:inputType="number"
+        android:maxLength="2" />
 
     <EditText
         android:id="@+id/txtTiendaEstado"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50sp"
         android:layout_alignEnd="@+id/btnFecha"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txtTiendaPiquetas"
@@ -67,11 +68,12 @@
         android:id="@+id/btnNuevaTienda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtTiendaUltima"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:background="#428bca"
         android:foreground="?selectableItemBackground"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="@string/btnTiendaAdd"
         android:textStyle="bold" />
 
@@ -79,10 +81,12 @@
         android:id="@+id/btnFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtTiendaPiquetas"
-        android:layout_below="@+id/txtTiendaEstado"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/txtTiendaUltima"
         android:background="#37BC9B"
         android:foreground="?selectableItemBackground"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:text="@string/btnTiendaFecha" />
 
     <Spinner
@@ -112,7 +116,7 @@
         android:layout_alignBottom="@+id/txtTiendaCapacidad"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/txtTiendaCapacidad"
+        android:layout_below="@+id/spnTiendaTipo"
         android:layout_toStartOf="@+id/txtTiendaCapacidad"
         android:gravity="center"
         android:text="@string/txtTiendaCapacidad"
@@ -122,12 +126,24 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/txtTiendaPiquetas"
-        android:layout_alignEnd="@+id/textView2"
+        android:layout_above="@+id/txtTiendaEstado"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/txtTiendaPiquetas"
+        android:layout_toStartOf="@+id/txtTiendaPiquetas"
         android:gravity="center"
         android:text="@string/txtTiendaPiquetas"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btnCancelarModificar_Editar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="#d9534f"
+        android:foreground="?selectableItemBackground"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/btnCancelar" />
 
 </RelativeLayout>

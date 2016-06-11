@@ -94,6 +94,11 @@ public class Ventana_NewTienda extends AppCompatActivity {
         }
     }
 
+    // Cancelamos
+    @OnClick(R.id.btnCancelarModificar_Editar)
+    public void CANCERLAR_MODIFICAR() {
+        finish();
+    }
 
     // AÑADIMOS UNA NUEVA TIENDA
     @OnClick(R.id.btnNuevaTienda)

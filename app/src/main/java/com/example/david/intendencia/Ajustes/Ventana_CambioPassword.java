@@ -33,6 +33,11 @@ public class Ventana_CambioPassword extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    //HACEMOS CLIC EN CANCELAR
+    @OnClick(R.id.btnCancelarCambioPass)
+    public void CANCELAR_PASS() {
+        finish();
+    }
 
     //HACEMOS CLIC EN "CAMBIAR CONTRASEÑA"
     @OnClick(R.id.btnConfirmarCambioPass)

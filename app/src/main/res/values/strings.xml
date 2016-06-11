@@ -79,22 +79,42 @@
     <string name="hintTiendaFecha">Ultima Revisión</string>
     <string name="btnTiendaAdd">Añadir</string>
     <string name="btnTiendaModify">Modificar</string>
-    <string name="btnTiendaFecha">Fecha</string>
+    <string name="btnTiendaFecha">Ultima Revisión</string>
     <string name="txtTiendaCapacidad">Capacidad</string>
     <string name="txtTiendaPiquetas">Piquetas</string>
 
     //Strings del layout Info Tienda
     <string name="imageAttribute">Imagen Tienda</string>
 
+    // String para los Spinners
     <string-array name="modelo_tienda">
         <item>- Seleccione Modelo -</item>
-        <item>Canadiense</item>
+        <item>Arpa</item>
         <item>Batisielles</item>
+        <item>Canadiense</item>
         <item>Pabellón</item>
     </string-array>
     <string-array name="tipo_tienda">
         <item>- Seleccione Tipo -</item>
-        <item>Fija</item>
         <item>Ataque</item>
+        <item>Fija</item>
+    </string-array>
+
+    <string-array name="tipo_item">
+        <item>Bomba de Agua</item>
+        <item>Bombona Gas - Pequeña</item>
+        <item>Bombona Gas - Grande</item>
+        <item>Cabezal/Hornillo</item>
+        <item>Cacerola</item>
+        <item>Grupo Electrogeno</item>
+        <item>Lumogas</item>
+        <item>Sarten</item>
+        <item>Olla</item>
+    </string-array>
+    <string-array name="marca_item">
+        <item>Campingaz</item>
+        <item>Primus</item>
+        <item>Honda</item>
+        <item>Genérica</item>
     </string-array>
 </resources>

@@ -33,12 +33,24 @@
         android:id="@+id/btnConfirmarCambioCorreo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtCorreoNuevo"
-        android:layout_centerHorizontal="true"
         android:background="#428bca"
         android:foreground="?selectableItemBackground"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="@string/btnCambiar" />
+        android:text="@string/btnCambiar"
+        android:layout_below="@+id/txtCorreoNuevo"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnCancelarCambioCorreo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#d9534f"
+        android:foreground="?selectableItemBackground"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/btnCancelar"
+        android:layout_below="@+id/txtCorreoNuevo"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

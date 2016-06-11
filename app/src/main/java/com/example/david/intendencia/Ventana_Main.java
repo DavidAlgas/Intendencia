@@ -3,11 +3,14 @@ package com.example.david.intendencia;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.david.intendencia.Ajustes.Ventana_Ajustes;
 import com.example.david.intendencia.Tabs.SwipeAdapter;
@@ -28,7 +31,7 @@ public class Ventana_Main extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-
+        //Adpatador para las Tabs
         SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager());
         viewPager.setAdapter(swipeAdapter);
     }
@@ -47,6 +50,24 @@ public class Ventana_Main extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        //Hacemos la vista searchable
+        MenuItem itemBuscar = menu.findItem(R.id.Buscar);
+        SearchView vistaBuscar = (SearchView) MenuItemCompat.getActionView(itemBuscar);
+
+        vistaBuscar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(Ventana_Main.this, "Hola1", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Toast.makeText(Ventana_Main.this, "Hola2", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         return true;
     }
 
@@ -57,6 +78,10 @@ public class Ventana_Main extends AppCompatActivity {
             case R.id.tareas:
                 Intent abrirTareas = new Intent(this, Ventana_Tareas.class);
                 startActivity(abrirTareas);
+                return true;
+            case R.id.addItems:
+                Intent nuevaItem = new Intent(this, Ventana_NewItem.class);
+                startActivity(nuevaItem);
                 return true;
             case R.id.addTienda:
                 Intent nuevaTienda = new Intent(this, Ventana_NewTienda.class);

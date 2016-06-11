@@ -154,10 +154,31 @@
                 android:value=".Ventana_Main" />
         </activity>
 
-        <!-- 7 VENTANA NUEVA_TIENDA -->
+        <!-- 8 VENTANA NUEVO_ITEM -->
+        <activity
+            android:name=".Ventana_NewItem"
+            android:label="Añadir Item"
+            android:parentActivityName=".Ventana_Main"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Main" />
+        </activity>
+
+        <!-- 9 VENTANA INFO_TIENDA -->
         <activity
             android:name=".Ventana_InfoTienda"
             android:label="Información Tienda"
+            android:parentActivityName=".Ventana_Main"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ventana_Main" />
+        </activity>
+        <!-- 10 VENTANA INFO_ITEM -->
+        <activity
+            android:name=".Ventana_InfoItem"
+            android:label="Información Item"
             android:parentActivityName=".Ventana_Main"
             android:screenOrientation="portrait">
             <meta-data

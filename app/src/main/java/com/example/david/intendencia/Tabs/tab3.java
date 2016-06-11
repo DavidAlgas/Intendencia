@@ -44,16 +44,26 @@ import butterknife.ButterKnife;
 
 public class tab3 extends Fragment {
 
+    private String usuarioID, usuarioTag;
     private RecyclerView tiendasRV;
     private FirebaseRecyclerAdapter adaptadorTiendas;
     private final DatabaseReference refTiendas = FirebaseDatabase.getInstance().getReference("Tiendas");
-    private final DatabaseReference refMorosos = FirebaseDatabase.getInstance().getReference("Morosos");
+    private static final DatabaseReference refMorosos = FirebaseDatabase.getInstance().getReference("Morosos");
     private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View tab3 = inflater.inflate(R.layout.tab03, container, false);
+
+        if (user != null) {
+            usuarioID = user.getUid();
+            if (user.getDisplayName() == null) {
+                usuarioTag = user.getEmail();
+            } else {
+                usuarioTag = user.getDisplayName();
+            }
+        }
 
         tiendasRV = (RecyclerView) tab3.findViewById(R.id.ListadoTiendas);
 
@@ -65,7 +75,14 @@ public class tab3 extends Fragment {
             protected void populateViewHolder(TiendasViewHolder holder, Tienda tienda, int i) {
                 holder.txtNombre.setText(tienda.getNombre());
                 holder.txtModelo.setText(tienda.getModelo());
-                holder.ulltimaRevision.setText(tienda.getUltimaRevision());
+                holder.ulltimaRevision.setText("Ultima Revisión: " + tienda.getUltimaRevision());
+
+                // SI ESTA EN USO MOSTRAMOS EL MOROSO QUE LA TIENE
+                if (!tienda.isDisponible()) {
+                    holder.usadorPor.setText("Poseedor: " + tienda.getPoseedorNombre());
+                } else {
+                    holder.usadorPor.setText(null);
+                }
 
                 // MOSTRAMOS IMAGEN SEGUN MODELO
                 switch (tienda.getModelo()) {
@@ -74,6 +91,9 @@ public class tab3 extends Fragment {
                         break;
                     case "Batisielles":
                         holder.imgTienda.setImageResource(R.drawable.batisielles);
+                        break;
+                    case "Arpa":
+                        holder.imgTienda.setImageResource(R.drawable.arpa);
                         break;
                     case "Pabellón":
                         holder.imgTienda.setImageResource(R.drawable.pabellon);
@@ -133,7 +153,7 @@ public class tab3 extends Fragment {
 
     // Create a custom ViewHolder
     public class TiendasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        @Bind(R.id.cvv)
+        @Bind(R.id.cvTiendas)
         CardView fondoTienda;
         @Bind(R.id.txtLineaTiendaNombre)
         TextView txtNombre;
@@ -143,6 +163,8 @@ public class tab3 extends Fragment {
         ImageView imgTienda;
         @Bind(R.id.txtLineaUltimaRevision)
         TextView ulltimaRevision;
+        @Bind(R.id.txtLineaUsado)
+        TextView usadorPor;
 
         public TiendasViewHolder(View itemView) {
             super(itemView);
@@ -155,55 +177,41 @@ public class tab3 extends Fragment {
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             //menu.add(groupId, itemId, order, title)
             final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(getAdapterPosition());
-            String ID = "";
-            if (user != null) {
-                ID = user.getUid();
-            }
 
-            if (tiendaSelecc.getPoseedor().equals(ID)) {
+            if (tiendaSelecc.getPoseedorID().equals(usuarioID)) {
                 MenuItem accion0 = menu.add(0, v.getId(), 1, "Devolver");
                 accion0.setOnMenuItemClickListener(this);
             } else {
-                MenuItem accion0 = menu.add(0, v.getId(), 0, "Tomar Prestada");
-                accion0.setOnMenuItemClickListener(this);
+                if (tiendaSelecc.isDisponible()) {
+                    MenuItem accion0 = menu.add(0, v.getId(), 0, "Tomar Prestada");
+                    accion0.setOnMenuItemClickListener(this);
+
+                    MenuItem accion1 = menu.add(0, v.getId(), 2, "Editar");
+                    accion1.setOnMenuItemClickListener(this);
+
+                    MenuItem accion2 = menu.add(0, v.getId(), 3, "Eliminar");
+                    accion2.setOnMenuItemClickListener(this);
+                }
             }
-
-            MenuItem accion1 = menu.add(0, v.getId(), 2, "Editar");
-            accion1.setOnMenuItemClickListener(this);
-
-            MenuItem accion2 = menu.add(0, v.getId(), 3, "Eliminar");
-            accion2.setOnMenuItemClickListener(this);
         }
 
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            int position = getAdapterPosition();
-            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(position);
-            final DatabaseReference rutaTienda = adaptadorTiendas.getRef(position);
-
-            //ALMACENAMOS EL ID DE LA PERSONA Y UN NOMBRE DE USUARIO
-            String ID = "", QUIEN = "";
-            if (user != null) {
-                ID = user.getUid();
-                if (user.getDisplayName() == null) {
-                    QUIEN = user.getEmail();
-                } else {
-                    QUIEN = user.getDisplayName();
-                }
-            }
+            final Tienda tiendaSelecc = (Tienda) adaptadorTiendas.getItem(getAdapterPosition());
+            final DatabaseReference rutaTienda = adaptadorTiendas.getRef(getAdapterPosition());
 
             switch (item.getOrder()) {
                 // OPCION TOMAR ITEM
                 case 0:
                     if (tiendaSelecc.isDisponible()) {
-                        ADD_TIENDA_MOROSO(tiendaSelecc, rutaTienda, ID, QUIEN);
+                        ADD_TIENDA_MOROSO(tiendaSelecc, rutaTienda, usuarioID, usuarioTag);
                     } else {
                         Snackbar.make(itemView, "Tienda NO disponible", Snackbar.LENGTH_LONG).show();
                     }
                     return true;
                 // OPCION DEVOLVER ITEM
                 case 1:
-                    DEL_TIENDA_MOROSO(tiendaSelecc, rutaTienda, ID, QUIEN);
+                    DEL_TIENDA_MOROSO(tiendaSelecc, rutaTienda, usuarioID, usuarioTag);
                     return true;
                 // OPCION EDITAR ITEM
                 case 2:
@@ -246,12 +254,13 @@ public class tab3 extends Fragment {
     }
 
     // METODO PARA AÑADIR LA NUEVA TIENDA A LA LISTA DEL MOROSO
-    public void ADD_TIENDA_MOROSO(Tienda tiendaSelecc, final DatabaseReference rutaTienda, String ID, String QUIEN) {
+    public static void ADD_TIENDA_MOROSO(Tienda tiendaSelecc, final DatabaseReference rutaTienda, String ID, String QUIEN) {
         // Marcamos como NO DISPONIBLE esa tienda y le asignamos poseedor
         tiendaSelecc.setDisponible(false);
-        tiendaSelecc.setPoseedor(ID);
+        tiendaSelecc.setPoseedorID(ID);
         Map<String, Object> updates = new HashMap<>();
-        updates.put("poseedor", ID);
+        updates.put("poseedorID", ID);
+        updates.put("poseedorNombre", QUIEN);
         updates.put("disponible", false);
         rutaTienda.updateChildren(updates);
 
@@ -286,12 +295,14 @@ public class tab3 extends Fragment {
     }
 
     // METODO PARA DEVOLVER LA TIENDA
-    public void DEL_TIENDA_MOROSO(Tienda tiendaSelecc, final DatabaseReference rutaTienda, String ID, String QUIEN) {
+    public static void DEL_TIENDA_MOROSO(Tienda tiendaSelecc, final DatabaseReference rutaTienda, String ID, String QUIEN) {
         // Marcamos como DISPONIBLE esa tienda y le eliminamos poseedor
         tiendaSelecc.setDisponible(true);
-        tiendaSelecc.setPoseedor("Nadie");
+        tiendaSelecc.setPoseedorID("Nadie");
+        tiendaSelecc.setPoseedorNombre("Nadie");
         Map<String, Object> updates = new HashMap<>();
-        updates.put("poseedor", "Nadie");
+        updates.put("poseedorID", "Nadie");
+        updates.put("poseedorNombre", "Nadie");
         updates.put("disponible", true);
         rutaTienda.updateChildren(updates);
 

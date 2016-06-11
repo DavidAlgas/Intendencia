@@ -75,6 +75,14 @@
         android:layout_below="@+id/lblInfoTiendaRevision"
         android:background="@android:color/darker_gray" />
 
+    <View
+        android:id="@+id/horizontal08"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignEnd="@+id/txtInfoTiendaEstado"
+        android:layout_below="@+id/txtInfoTiendaEstado"
+        android:background="@android:color/darker_gray" />
+
     <TextView
         android:id="@+id/lblInfoTiendaNombre"
         android:layout_width="wrap_content"
@@ -123,7 +131,7 @@
         android:layout_below="@+id/lblInfoTiendaCapacidad"
         android:layout_marginBottom="5sp"
         android:layout_marginTop="5sp"
-        android:text="Nº Piquetas: "
+        android:text="Nº Piquetas"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
 
@@ -136,13 +144,13 @@
         android:layout_below="@+id/lblInfoTiendaTipo"
         android:layout_marginBottom="5sp"
         android:layout_marginTop="5sp"
-        android:text="Capacidad: "
+        android:text="Capacidad"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
 
     <TextView
         android:id="@+id/txtInfoTiendaNombre"
-        android:layout_width="100sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/horizontal01"
@@ -263,5 +271,63 @@
         android:text="Estado"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/lblInfoTiendaPoseedor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/horizontal08"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:text="Poseedor Actual"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtInfoTiendaPoseedor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtInfoTiendaEstado"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toEndOf="@+id/lblInfoTiendaPoseedor"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btnInfoTiendaCoger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff9900"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Coger" />
+
+    <Button
+        android:id="@+id/btnInfoTiendaEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtInfoTiendaPoseedor"
+        android:layout_alignParentBottom="true"
+        android:background="#d9534f"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Eliminar" />
+
+    <Button
+        android:id="@+id/btnInfoTiendaEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#37BC9B"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Editar" />
 
 </RelativeLayout>

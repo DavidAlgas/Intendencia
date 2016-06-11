@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <ImageView
+        android:id="@+id/imgInfoITEM"
+        android:layout_width="match_parent"
+        android:layout_height="150sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="5sp"
+        android:contentDescription="@string/imageAttribute"
+        android:scaleType="fitCenter"
+        android:src="@drawable/campingaz" />
+
+    <View
+        android:id="@+id/horizontal01"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/imgInfoITEM"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/horizontal02"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemTipo"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/horizontal03"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemMarca"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/horizontal04"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignEnd="@+id/txtInfoItemModelo"
+        android:layout_below="@+id/lblInfoItemModelo"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/horizontal05"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/lblInfoItemDetalles"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/lblInfoItemTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/horizontal01"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toStartOf="@+id/txtInfoItemMarca"
+        android:text="Tipo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/lblInfoItemMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemTipo"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toStartOf="@+id/txtInfoItemModelo"
+        android:text="Marca"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/lblInfoItemModelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemMarca"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toStartOf="@+id/txtInfoItemCantidad"
+        android:text="Modelo"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/lblInfoItemDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemCantidad"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toStartOf="@+id/txtInfoItemCantidad"
+        android:text="Detalles"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/lblInfoItemCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemModelo"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:text="Cantidad"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtInfoItemTipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/horizontal01"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toEndOf="@+id/lblInfoItemTipo"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtInfoItemMarca"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtInfoItemTipo"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toEndOf="@+id/lblInfoItemMarca"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtInfoItemModelo"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtInfoItemMarca"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toEndOf="@+id/lblInfoItemModelo"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtInfoItemCantidad"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/txtInfoItemModelo"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_toEndOf="@+id/lblInfoItemCantidad"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/txtInfoItemDetalles"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnInfoItemEliminar"
+        android:layout_alignEnd="@+id/horizontal05"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblInfoItemDetalles"
+        android:scrollbars="vertical"
+        android:textAlignment="viewEnd"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btnInfoItemEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="#d9534f"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Eliminar" />
+
+    <Button
+        android:id="@+id/btnInfoItemEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="#37BC9B"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="Editar" />
+
+</RelativeLayout>

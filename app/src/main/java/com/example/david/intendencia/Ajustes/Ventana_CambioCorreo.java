@@ -35,6 +35,12 @@ public class Ventana_CambioCorreo extends AppCompatActivity {
     }
 
 
+    //HACEMOS CLIC EN CANCELAR
+    @OnClick(R.id.btnCancelarCambioCorreo)
+    public void CANCELAR_CORREO() {
+        finish();
+    }
+
     //HACEMOS CLIC EN "CAMBIAR CORREO"
     @OnClick(R.id.btnConfirmarCambioCorreo)
     public void CAMBIAR_CORREO() {
