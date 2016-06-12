@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.david.intendencia.R;
 import com.example.david.intendencia.Ventana_Login;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,11 +63,12 @@ public class Ventana_BorrarUsuario extends AppCompatActivity {
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other Activities from stack
                             startActivity(intent);
                         }
-
-                        if (!task.isSuccessful()) {
-                            progreso.dismiss();
-                            Toast.makeText(Ventana_BorrarUsuario.this, "Error Eliminar", Toast.LENGTH_SHORT).show();
-                        }
+                    }
+                }).addOnFailureListener(Ventana_BorrarUsuario.this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progreso.dismiss();
+                        Toast.makeText(Ventana_BorrarUsuario.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }

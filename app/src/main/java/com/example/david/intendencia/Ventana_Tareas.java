@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.david.intendencia.Objetos.Tarea;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -49,7 +50,6 @@ public class Ventana_Tareas extends AppCompatActivity {
         setContentView(R.layout.activity_tareas);
         ButterKnife.bind(this);
 
-
         listadoRV.setHasFixedSize(true);
         listadoRV.setLayoutManager(new LinearLayoutManager(this));
 
@@ -77,7 +77,7 @@ public class Ventana_Tareas extends AppCompatActivity {
 
 
         // Creamos el listener para ver los eventos
-        ChildEventListener tareasListener = ref.addChildEventListener(new ChildEventListener() {
+        ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 listadoRV.scrollToPosition(adaptador.getItemCount() - 1);

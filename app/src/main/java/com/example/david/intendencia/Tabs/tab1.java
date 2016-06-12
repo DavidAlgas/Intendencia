@@ -93,7 +93,7 @@ public class tab1 extends Fragment {
                     case "Cacerola":
                         holder.imagenItem.setImageResource(R.drawable.cacerola);
                         break;
-                    case "Grupo Electrogeno":
+                    case "Grupo Electrógeno":
                         holder.imagenItem.setImageResource(R.drawable.grupo);
                         break;
                     case "Lumogas":

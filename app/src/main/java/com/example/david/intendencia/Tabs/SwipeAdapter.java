@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.Locale;
-
 public class SwipeAdapter extends FragmentStatePagerAdapter {
 
     public SwipeAdapter(FragmentManager fm) {
@@ -17,14 +15,11 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                tab1 t1 = new tab1();
-                return t1;
+                return new tab1();
             case 1:
-                tab2 t2 = new tab2();
-                return t2;
+                return new tab2();
             case 2:
-                tab3 t3 = new tab3();
-                return t3;
+                return new tab3();
         }
         return null;
     }
@@ -36,12 +31,11 @@ public class SwipeAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        Locale i = Locale.getDefault();
         switch (position) {
             case 0:
-                return "Tab01";
+                return "Items";
             case 1:
-                return "Tab02";
+                return "Bombonas";
             case 2:
                 return "Tiendas";
         }

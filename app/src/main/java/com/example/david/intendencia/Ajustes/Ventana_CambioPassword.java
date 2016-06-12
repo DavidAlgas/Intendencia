@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.david.intendencia.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,11 +63,12 @@ public class Ventana_CambioPassword extends AppCompatActivity {
                         Toast.makeText(Ventana_CambioPassword.this, "Pass Modificada", Toast.LENGTH_SHORT).show();
                         finish();
                     }
-
-                    if (!task.isSuccessful()) {
-                        progreso.dismiss();
-                        Toast.makeText(Ventana_CambioPassword.this, "ERROR Cambio Pass", Toast.LENGTH_SHORT).show();
-                    }
+                }
+            }).addOnFailureListener(this, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progreso.dismiss();
+                    Toast.makeText(Ventana_CambioPassword.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         }

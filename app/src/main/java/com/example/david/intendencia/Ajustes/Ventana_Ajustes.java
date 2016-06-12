@@ -52,7 +52,7 @@ public class Ventana_Ajustes extends AppCompatActivity {
     @OnClick(R.id.btnAyuda)
     public void Ventana_AjustesAyuda() {
         new AlertDialog.Builder(this).setTitle(R.string.menuAcerca)
-                .setMessage("Gestion de Intendencia.\nDavid Algas Calavia")
+                .setMessage("Gestión de Intendencia.\nDavid Algás Calavia")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                     }

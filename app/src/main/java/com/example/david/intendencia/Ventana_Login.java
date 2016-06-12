@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,13 +101,12 @@ public class Ventana_Login extends AppCompatActivity {
                         progreso.dismiss();
                         finish();
                     }
-
-
-                    if (!task.isSuccessful()) {
-                        progreso.dismiss();
-                        Log.w("ERROR", "ERROR LOGIN", task.getException());
-                        Toast.makeText(Ventana_Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                }
+            }).addOnFailureListener(this, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progreso.dismiss();
+                    Toast.makeText(Ventana_Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         }

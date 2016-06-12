@@ -93,6 +93,7 @@ public class Ventana_InfoTienda extends AppCompatActivity {
                 }
 
                 // Comprobamos si el usuario logeado actual es el poseedor de la tienda
+                assert user != null;
                 if (selecTienda.getPoseedorID().equals(user.getUid())) {
                     btnCoger_Dejar.setText("Dejar");
                     btnEditar.setEnabled(false);
@@ -122,6 +123,9 @@ public class Ventana_InfoTienda extends AppCompatActivity {
                         break;
                     case "Batisielles":
                         imagenTienda.setImageResource(R.drawable.batisielles);
+                        break;
+                    case "Arpa":
+                        imagenTienda.setImageResource(R.drawable.arpa);
                         break;
                     case "Pabellón":
                         imagenTienda.setImageResource(R.drawable.pabellon);

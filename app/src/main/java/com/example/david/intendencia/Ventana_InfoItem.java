@@ -94,7 +94,7 @@ public class Ventana_InfoItem extends AppCompatActivity {
                     case "Cacerola":
                         imagenITEM.setImageResource(R.drawable.cacerola);
                         break;
-                    case "Grupo Electrogeno":
+                    case "Grupo Electrógeno":
                         imagenITEM.setImageResource(R.drawable.grupo);
                         break;
                     case "Lumogas":
